@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+        <style type="text/css">
+            #bg { position: fixed; top: 0; left: 0; }
+            .bgwidth { 
+                max-width: 100%;
+                height: auto;
+                width: auto\9; /* ie8 */
+            }
+            .bgheight { 
+                max-height: 100%;
+                width: auto;
+                height: auto\9; /* ie8 */
+            }
+            img {
+                position: absolute;
+                margin: auto;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <img src="" id="bg" />
+        </div>
+        <script type="text/javascript">
+            var imgUrl;
+            $(window).load(function() {   
+                imgUrl = window.location.search.replace( "?", "" );
+                imgUrl = imgUrl.replace("img=","");
+                document.getElementById('bg').src = imgUrl
+
+                var theWindow        = $(window),
+                    $bg              = $("#bg"),
+                    aspectRatio      = $bg.width() / $bg.height();
+                                            
+                function resizeBg() {
+                    
+                    if ( (theWindow.width() / theWindow.height()) > aspectRatio ) {
+                        $bg
+                            .removeClass()
+                            .addClass('bgheight');
+                    } else {
+                        $bg
+                            .removeClass()
+                            .addClass('bgwidth');
+                    }
+                                
+                }
+                                            
+                theWindow.resize(resizeBg).trigger("resize");
+
+            });
+            
+        </script>
+    </body>
+</html>
